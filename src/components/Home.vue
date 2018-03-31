@@ -64,7 +64,7 @@ export default {
 <style>
 html,
 body {
-    background: #000;
+    background: #333;
     color: #f8f8f2;
     font-family: Colfax, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,

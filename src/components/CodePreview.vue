@@ -190,11 +190,12 @@ export default {
 }
 .code-preview:hover {
     background: #09f;
-    opacity: 0.5;
+    opacity: 1;
     cursor: pointer;
     animation-name: code-hover;
     animation-duration: 0.1s;
     animation-fill-mode: forwards;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 .background {
     background: #1e1e1e;

@@ -2,17 +2,14 @@
     <div class="neural-network">
         <code-preview class="active-preview" :colors="currentScheme" />
         <div class="actions-container">
-            <button class="btn btn-dislike" @click="rate('dislike')">Dislike</button>
-            <button class="btn btn-neutral" @click="rate('neutral')">Neutral</button>
-            <button class="btn btn-like" @click="rate('like')">Like</button>
-            <button class="btn btn-train" @click="train" :disabled="!trainingData.length">Train Data</button>
-            <button class="btn btn-train" @click="generate" :disabled="!trainingData.length">Generate Color Schemes</button>
-        </div>
-        {{ trainingData }}
-        <hr/>
-        {{ sampleData }}
+            <button class="btn btn-dislike" @click="rate('dislike')">DISLIKE</button>
+            <button class="btn btn-neutral" @click="rate('neutral')">NEUTRAL</button>
+            <button class="btn btn-like" @click="rate('like')">LIKE</button>
+            <button class="btn btn-train" @click="train" :disabled="trainingData.length < 5">Train Data</button>
+            <button class="btn btn-train" @click="generate" :disabled="isTraining">Generate Color Schemes</button>
+        </div>     
         <div class="preview-grid">
-            <code-preview v-for="s in generatedSchemes" :key="s.keyword" :colors="s"/>
+            <code-preview v-for="s in generatedSchemes" :key="Math.floor(s.score)" :colors="s"/>
         </div>
     </div>
 </template>
@@ -34,62 +31,14 @@ export default {
                 secondary: 'purple'
             },
             generatedSchemes: [],
+            sortedSchemes: [],
             neuralNetwork: {},
-            net: {},
-            sampleData: [
-                {
-                    input: [
-                        0.36,
-                        0.31,
-                        0.59,
-                        0.85,
-                        0.47,
-                        0.47,
-                        0.49,
-                        0.97,
-                        0.83,
-                        0.11,
-                        0.1,
-                        0.15,
-                        0.54,
-                        0.52,
-                        0.24,
-                        0.32,
-                        0.43,
-                        1
-                    ],
-                    output: [1]
-                },
-                {
-                    input: [
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        1,
-                        1,
-                        0,
-                        0.14,
-                        0.18,
-                        0.13,
-                        0.78,
-                        0.36,
-                        0.8,
-                        0.24,
-                        0.95,
-                        0.3
-                    ],
-                    output: [0]
-                }
-            ]
+            isTraining: true
         }
     },
     created() {
-        // let net = new brain.NeuralNetwork()
         this.setColors()
-        this.net = new brain.NeuralNetwork()
+        this.neuralNetwork = new brain.NeuralNetwork()
     },
     components: {
         CodePreview
@@ -115,6 +64,7 @@ export default {
         },
         rate(type) {
             let score = 0
+            this.isTraining = true
             switch (type) {
                 case 'dislike':
                     score = 0
@@ -155,30 +105,6 @@ export default {
             })
 
             this.setColors()
-
-            this.net.train(this.trainingData)
-
-            var [output] = this.net.run([
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                0.14,
-                0.18,
-                0.13,
-                0.78,
-                0.36,
-                0.8,
-                0.24,
-                0.95,
-                0.3
-            ])
-            console.log(output)
         },
         getRandomRgb() {
             return {
@@ -198,16 +124,14 @@ export default {
             return Math.round(data / 2.55) / 100
         },
         train() {
-            console.log('training')
             this.neuralNetwork = new brain.NeuralNetwork({
                 activation: 'leaky-relu'
             })
             this.neuralNetwork.train(this.trainingData)
+            this.isTraining = false
         },
         generate() {
-            console.log(this.neuralNetwork)
-
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 10; i++) {
                 let scheme = this.generateColors()
                 let data = [
                     this.normalizeData(scheme.keyword.red),
@@ -230,9 +154,23 @@ export default {
                     this.normalizeData(scheme.secondary.blue)
                 ]
 
-                let score = this.neuralNetwork.run(data)
-                console.log(score[0])
+                let [score] = this.neuralNetwork.run(data)
+                scheme.score = score
+                this.generatedSchemes.push(scheme)
             }
+
+            this.sortedSchemes = this.generatedSchemes.sort((left, right) => {
+                let a = left.score
+                // console.log('a', a)
+                let b = right.score
+                // console.log('b', b)
+
+                return b > a
+            })
+
+            // this.sortedSchemes.forEach(item => {
+            //     console.log(item.score)
+            // })
         }
     }
 }
@@ -255,17 +193,20 @@ export default {
     padding: 9px 12px 7px;
     width: 150px;
     flex-shrink: 2;
+    font-family: 'Source Sans Pro', sans-serif;
+    transition: 0.3s ease all;
 }
 .btn-dislike {
-    background: red;
+    background: #ff0072;
 }
 .btn-neutral {
-    background: blue;
+    background: #09f;
 }
 .btn-train {
     width: 48%;
     margin-top: 10px;
-    background: purple;
+    background: #fdc307;
+    font-weight: 800;
 }
 .btn-train:disabled {
     opacity: 0.5;
