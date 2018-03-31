@@ -1,5 +1,5 @@
 <template>
-  <div class="code-preview background" :style="{ background: colors.background }">
+  <div class="code-preview background" :style="{ background: createBackground }">
     <p>
       <span 
         class="keyword"
@@ -146,6 +146,17 @@ export default {
             )
         },
         createSecondary() {
+            return (
+                'rgb(' +
+                this.colors.secondary.red +
+                ',' +
+                this.colors.secondary.green +
+                ',' +
+                this.colors.secondary.blue +
+                ')'
+            )
+        },
+        createBackground() {
             return (
                 'rgb(' +
                 this.colors.secondary.red +

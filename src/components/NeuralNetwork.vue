@@ -6,6 +6,7 @@
       <button class="btn btn-neutral" @click="rate('neutral')">Neutral</button>
       <button class="btn btn-like" @click="rate('like')">Like</button>
     </div>
+    <!-- {{ trainingData }} -->
   </div>
 </template>
 
@@ -29,11 +30,20 @@ export default {
     },
     created() {
         let net = new brain.NeuralNetwork()
+        this.setColors()
     },
     components: {
         CodePreview
     },
     methods: {
+        setColors() {
+            this.currentScheme.keyword = this.getRandomRgb()
+            this.currentScheme.variable = this.getRandomRgb()
+            this.currentScheme.string = this.getRandomRgb()
+            this.currentScheme.background = this.getRandomRgbDark()
+            this.currentScheme.method = this.getRandomRgb()
+            this.currentScheme.secondary = this.getRandomRgb()
+        },
         rate(type) {
             let score = 0
             switch (type) {
@@ -50,12 +60,32 @@ export default {
                     console.log('like')
                     break
             }
-            this.currentScheme.keyword = this.getRandomRgb()
-            this.currentScheme.variable = this.getRandomRgb()
-            this.currentScheme.string = this.getRandomRgb()
-            this.currentScheme.background = this.getRandomRgb()
-            this.currentScheme.method = this.getRandomRgb()
-            this.currentScheme.secondary = this.getRandomRgb()
+
+            this.trainingData.push({
+                input: [
+                    this.normalizeData(this.currentScheme.keyword.red),
+                    this.normalizeData(this.currentScheme.keyword.green),
+                    this.normalizeData(this.currentScheme.keyword.blue),
+                    this.normalizeData(this.currentScheme.variable.red),
+                    this.normalizeData(this.currentScheme.variable.green),
+                    this.normalizeData(this.currentScheme.variable.blue),
+                    this.normalizeData(this.currentScheme.string.red),
+                    this.normalizeData(this.currentScheme.string.green),
+                    this.normalizeData(this.currentScheme.string.blue),
+                    this.normalizeData(this.currentScheme.background.red),
+                    this.normalizeData(this.currentScheme.background.green),
+                    this.normalizeData(this.currentScheme.background.blue),
+                    this.normalizeData(this.currentScheme.method.red),
+                    this.normalizeData(this.currentScheme.method.green),
+                    this.normalizeData(this.currentScheme.method.blue),
+                    this.normalizeData(this.currentScheme.secondary.red),
+                    this.normalizeData(this.currentScheme.secondary.green),
+                    this.normalizeData(this.currentScheme.secondary.blue)
+                ],
+                ouput: [score]
+            })
+
+            this.setColors()
         },
         getRandomRgb() {
             return {
@@ -63,6 +93,16 @@ export default {
                 green: Math.round(Math.random() * 205 + 50),
                 blue: Math.round(Math.random() * 205 + 50)
             }
+        },
+        getRandomRgbDark() {
+            return {
+                red: Math.round(Math.random() * 50),
+                green: Math.round(Math.random() * 50),
+                blue: Math.round(Math.random() * 50)
+            }
+        },
+        normalizeData(data) {
+            return Math.round(data / 2.55) / 100
         }
     }
 }
