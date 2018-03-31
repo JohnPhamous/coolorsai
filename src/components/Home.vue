@@ -1,39 +1,36 @@
 <template>
-  <div 
-    class="home"
-    :class="[
-      {'animate-down': preview},
-      {'animate-up': !preview}
+    <div 
+        class="home"
+        :class="[
+        {'animate-down': preview},
+        {'animate-up': !preview}
     ]">
-    <div class="header is-centered">
-      <h1>Coolors<span>AI</span></h1>
-      <transition name="fade" mode="out-in">
-        <p v-if="preview">Find the perfect color scheme using <span>artificial intellgence</span></p>
-      </transition>
-    </div>
-
-    <transition name="fade" mode="out-in">
-      <button v-if="!preview" @click="restartApp" class="btn-restart">Restart</button>
-
-      <div
-        v-if="preview"
-        class="info"
-      >
-        <Info />
-        <button @click="preview = false" class="btn-start">Start</button>
-      </div>
-    </transition>
-
-    <transition name="fade" mode="out-in">
-      <div v-if="!preview" class="app">
-        <neural-network  />
-        <div class="preview-grid">
-          <code-preview v-for="s in schemes" :key="s" colors="sdfsdf"/>
+        <div class="header is-centered">
+            <h1>Coolors<span>AI</span></h1>
+            <transition name="fade" mode="out-in">
+                <p v-if="preview">Find the perfect color scheme using <span>artificial intellgence</span></p>
+            </transition>
         </div>
-      </div>
-    </transition>
 
-  </div>
+        <transition name="fade" mode="out-in">
+            <button v-if="!preview" @click="restartApp" class="btn-restart">Restart</button>
+
+            <div
+                v-if="preview"
+                class="info"
+            >
+                <Info />
+                <button @click="preview = false" class="btn-start">Start</button>
+            </div>
+        </transition>
+
+        <transition name="fade" mode="out-in">
+            <div v-if="!preview" class="app">
+                <neural-network  />
+            </div>
+        </transition>
+
+    </div>
 </template>
 
 <script>
@@ -149,10 +146,6 @@ body {
 }
 .is-centered {
     text-align: center;
-}
-.preview-grid {
-    display: flex;
-    flex-wrap: wrap;
 }
 button {
     box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1),

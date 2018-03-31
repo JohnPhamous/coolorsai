@@ -1,89 +1,89 @@
 <template>
-  <div class="code-preview background" :style="{ background: createBackground }">
-    <p>
-      <span 
-        class="keyword"
-        :style="{ color: createKeyword }"
-      >import</span>
-      <span
-        class="variable"
-        :style="{ color: createVariable }"
-      >Vue</span>
-      <span
-        class="keyword"
-        :style="{ color: createKeyword }"
-      >from</span>
-      <span
-        class="string"
-        :style="{ color: createString }"
-      >'Vue'</span>
-      <br />
-      <span
-        class="keyword"
-        :style="{ color: createKeyword }"
-      >import</span>
-      <span
-        class="variable"
-        :style="{ color: createVariable }"
-      >App</span>
-      <span
-        class="keyword"
-        :style="{ color: createKeyword }"
-      >from</span>
-      <span
-        class="string"
-        :style="{ color: createString }"
-      >'./App'</span>
-      <br /><br />
-      <span
-        class="keyword"
-        :style="{ color: createKeyword }"
-      >let</span>
-      <span
-        class="variable"
-        :style="{ color: createVariable }"
-      >foo</span>
-      <span
-        class="keyword"
-        :style="{ color: createKeyword }"
-      >=</span>
-      <span
-        class="string"
-      >'bar'</span><span
-        class="keyword"
-        :style="{ color: createKeyword }"
-      >;</span>
-      <br /><br />
-      <span
-        class="keyword"
-        :style="{ color: createKeyword }"
-      >export default</span> 
-      <span
-        class="variable"
-        :style="{ color: createVariable }"
-      >foo</span><span
-        class="keyword"
-        :style="{ color: createKeyword }"
-      >;</span>
-      <br /><br />
-      <span
-        class="method" 
-        :style="{ color: createMethod }"
-      >console.log</span><span
-        class="secondary"
-        :style="{ color: createSecondary }"
-      >(</span><span 
-        class="string" 
-        :style="{ color: createString }"
-      >'Hello World!'</span><span
-        class="secondary"
-        :style="{ color: createSecondary }"
-      >)</span><span
-        class="keyword"
-        :style="{ color: createKeyword }"
-      >;</span>
-    </p>
-  </div>
+    <div class="code-preview background" :style="{ background: createBackground }">
+        <p>
+        <span 
+            class="keyword"
+            :style="{ color: createKeyword }"
+        >import</span>
+        <span
+            class="variable"
+            :style="{ color: createVariable }"
+        >Vue</span>
+        <span
+            class="keyword"
+            :style="{ color: createKeyword }"
+        >from</span>
+        <span
+            class="string"
+            :style="{ color: createString }"
+        >'Vue'</span>
+        <br />
+        <span
+            class="keyword"
+            :style="{ color: createKeyword }"
+        >import</span>
+        <span
+            class="variable"
+            :style="{ color: createVariable }"
+        >App</span>
+        <span
+            class="keyword"
+            :style="{ color: createKeyword }"
+        >from</span>
+        <span
+            class="string"
+            :style="{ color: createString }"
+        >'./App'</span>
+        <br /><br />
+        <span
+            class="keyword"
+            :style="{ color: createKeyword }"
+        >let</span>
+        <span
+            class="variable"
+            :style="{ color: createVariable }"
+        >foo</span>
+        <span
+            class="keyword"
+            :style="{ color: createKeyword }"
+        >=</span>
+        <span
+            class="string"
+        >'bar'</span><span
+            class="keyword"
+            :style="{ color: createKeyword }"
+        >;</span>
+        <br /><br />
+        <span
+            class="keyword"
+            :style="{ color: createKeyword }"
+        >export default</span> 
+        <span
+            class="variable"
+            :style="{ color: createVariable }"
+        >foo</span><span
+            class="keyword"
+            :style="{ color: createKeyword }"
+        >;</span>
+        <br /><br />
+        <span
+            class="method" 
+            :style="{ color: createMethod }"
+        >console.log</span><span
+            class="secondary"
+            :style="{ color: createSecondary }"
+        >(</span><span 
+            class="string" 
+            :style="{ color: createString }"
+        >'Hello World!'</span><span
+            class="secondary"
+            :style="{ color: createSecondary }"
+        >)</span><span
+            class="keyword"
+            :style="{ color: createKeyword }"
+        >;</span>
+        </p>
+    </div>
 </template>
 
 <script>
@@ -159,11 +159,11 @@ export default {
         createBackground() {
             return (
                 'rgb(' +
-                this.colors.secondary.red +
+                this.colors.background.red +
                 ',' +
-                this.colors.secondary.green +
+                this.colors.background.green +
                 ',' +
-                this.colors.secondary.blue +
+                this.colors.background.blue +
                 ')'
             )
         }
