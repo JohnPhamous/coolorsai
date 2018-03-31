@@ -8,18 +8,26 @@
     <div class="header is-centered">
       <h1>Coolors<span>AI</span></h1>
       <p>Find the perfect color scheme using <span>artificial intellgence</span></p>
+    </div>
+
+    <transition name="fade" mode="out-in">
       <button v-if="!preview" @click="restartApp" class="btn-restart">Restart</button>
-    </div>
 
-    <div v-if="preview" class="info">
-      <Info v-if="preview" />
-      <button @click="preview = false" class="btn-start">Start</button>
-    </div>
+      <div
+        v-if="preview"
+        class="info"
+      >
+        <Info
+          v-if="preview" 
+        />
+        <button @click="preview = false" class="btn-start">Start</button>
+      </div>
+    </transition>
 
-    <div v-else class="app">
+    <div v-if="!preview" class="app">
       <neural-network  />
       <div class="preview-grid">
-        <code-preview v-for="i in schemes" :key="i" colors="sdfsdf"/>
+        <code-preview v-for="s in schemes" :key="s" colors="sdfsdf"/>
       </div>
     </div>
 
@@ -91,6 +99,32 @@ body {
     to {
         transform: translateY(30vh);
     }
+}
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+@keyframes fade-out {
+    from {
+        opacity: 100%;
+    }
+    to {
+        opacity: 0%;
+    }
+}
+.fade-out {
+    animation: fade-out;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.fade-in {
+    animation: fade-in;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
 }
 .header h1 {
     font-size: 5em;
