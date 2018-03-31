@@ -1,23 +1,162 @@
 <template>
-  <div class="code-preview background">
+  <div class="code-preview background" :style="{ background: colors.background }">
     <p>
-      <span class="keyword">import</span> <span class="variable">Vue</span> <span class="keyword">from</span> <span class="string">'Vue'</span>
+      <span 
+        class="keyword"
+        :style="{ color: createKeyword }"
+      >import</span>
+      <span
+        class="variable"
+        :style="{ color: createVariable }"
+      >Vue</span>
+      <span
+        class="keyword"
+        :style="{ color: createKeyword }"
+      >from</span>
+      <span
+        class="string"
+        :style="{ color: createString }"
+      >'Vue'</span>
       <br />
-      <span class="keyword">import</span> <span class="variable">App</span> <span class="keyword">from</span> <span class="string">'./App'</span>
+      <span
+        class="keyword"
+        :style="{ color: createKeyword }"
+      >import</span>
+      <span
+        class="variable"
+        :style="{ color: createVariable }"
+      >App</span>
+      <span
+        class="keyword"
+        :style="{ color: createKeyword }"
+      >from</span>
+      <span
+        class="string"
+        :style="{ color: createString }"
+      >'./App'</span>
       <br /><br />
-      <span class="keyword">let</span> <span class="variable">foo</span> <span class="keyword">=</span> <span class="string">'bar'</span><span class="keyword">;</span>
+      <span
+        class="keyword"
+        :style="{ color: createKeyword }"
+      >let</span>
+      <span
+        class="variable"
+        :style="{ color: createVariable }"
+      >foo</span>
+      <span
+        class="keyword"
+        :style="{ color: createKeyword }"
+      >=</span>
+      <span
+        class="string"
+      >'bar'</span><span
+        class="keyword"
+        :style="{ color: createKeyword }"
+      >;</span>
       <br /><br />
-      <span class="keyword">export default</span> <span class="variable">foo</span><span class="keyword">;</span>
+      <span
+        class="keyword"
+        :style="{ color: createKeyword }"
+      >export default</span> 
+      <span
+        class="variable"
+        :style="{ color: createVariable }"
+      >foo</span><span
+        class="keyword"
+        :style="{ color: createKeyword }"
+      >;</span>
       <br /><br />
-      <span class="method">console.log</span><span class="secondary">(</span><span class="string">'Hello World!'</span><span class="secondary">)</span><span class="keyword">;</span>
-      {{ colors }}
+      <span
+        class="method" 
+        :style="{ color: createMethod }"
+      >console.log</span><span
+        class="secondary"
+        :style="{ color: createSecondary }"
+      >(</span><span 
+        class="string" 
+        :style="{ color: createString }"
+      >'Hello World!'</span><span
+        class="secondary"
+        :style="{ color: createSecondary }"
+      >)</span><span
+        class="keyword"
+        :style="{ color: createKeyword }"
+      >;</span>
     </p>
   </div>
 </template>
 
 <script>
 export default {
-    props: ['colors']
+    props: ['colors'],
+    computed: {
+        createKeyword() {
+            return (
+                'rgb(' +
+                this.colors.keyword.red +
+                ',' +
+                this.colors.keyword.green +
+                ',' +
+                this.colors.keyword.blue +
+                ')'
+            )
+        },
+        createVariable() {
+            return (
+                'rgb(' +
+                this.colors.variable.red +
+                ',' +
+                this.colors.variable.green +
+                ',' +
+                this.colors.variable.blue +
+                ')'
+            )
+        },
+        createString() {
+            return (
+                'rgb(' +
+                this.colors.string.red +
+                ',' +
+                this.colors.string.green +
+                ',' +
+                this.colors.string.blue +
+                ')'
+            )
+        },
+        createBackground() {
+            return (
+                'rgb(' +
+                this.colors.background.red +
+                ',' +
+                this.colors.background.green +
+                ',' +
+                this.colors.background.blue +
+                ')'
+            )
+        },
+        createMethod() {
+            return (
+                'rgb(' +
+                this.colors.method.red +
+                ',' +
+                this.colors.method.green +
+                ',' +
+                this.colors.method.blue +
+                ')'
+            )
+        },
+        createSecondary() {
+            return (
+                'rgb(' +
+                this.colors.secondary.red +
+                ',' +
+                this.colors.secondary.green +
+                ',' +
+                this.colors.secondary.blue +
+                ')'
+            )
+        }
+    }
 }
 </script>
 

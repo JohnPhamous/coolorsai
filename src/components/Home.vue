@@ -19,19 +19,19 @@
         v-if="preview"
         class="info"
       >
-        <Info
-          v-if="preview" 
-        />
+        <Info />
         <button @click="preview = false" class="btn-start">Start</button>
       </div>
     </transition>
 
-    <div v-if="!preview" class="app">
-      <neural-network  />
-      <div class="preview-grid">
-        <code-preview v-for="s in schemes" :key="s" colors="sdfsdf"/>
+    <transition name="fade" mode="out-in">
+      <div v-if="!preview" class="app">
+        <neural-network  />
+        <div class="preview-grid">
+          <code-preview v-for="s in schemes" :key="s" colors="sdfsdf"/>
+        </div>
       </div>
-    </div>
+    </transition>
 
   </div>
 </template>
