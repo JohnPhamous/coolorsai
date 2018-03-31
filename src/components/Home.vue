@@ -7,7 +7,9 @@
     ]">
     <div class="header is-centered">
       <h1>Coolors<span>AI</span></h1>
-      <p>Find the perfect color scheme using <span>artificial intellgence</span></p>
+      <transition name="fade" mode="out-in">
+        <p v-if="preview">Find the perfect color scheme using <span>artificial intellgence</span></p>
+      </transition>
     </div>
 
     <transition name="fade" mode="out-in">
@@ -79,10 +81,47 @@ body {
     animation-duration: 1s;
     animation-fill-mode: forwards;
 }
+.animate-up .header h1 {
+    animation: reduce-text;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes reduce-text {
+    from {
+        font-size: 5em;
+    }
+    to {
+        font-size: 2em;
+    }
+}
 .animate-down {
     animation: go-down;
     animation-duration: 1s;
     animation-fill-mode: forwards;
+}
+.animate-down .header h1 {
+    animation: increase-text;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes increase-text {
+    from {
+        font-size: 2em;
+    }
+    to {
+        font-size: 5em;
+    }
+}
+.header h1 {
+    font-size: 5em;
+    margin-bottom: 0px;
+}
+.header span {
+    color: #09f;
+}
+.header p {
+    font-size: 1.5em;
+    margin-top: 10px;
 }
 @keyframes go-up {
     from {
@@ -107,35 +146,6 @@ body {
 .fade-enter,
 .fade-leave-to {
     opacity: 0;
-}
-@keyframes fade-out {
-    from {
-        opacity: 100%;
-    }
-    to {
-        opacity: 0%;
-    }
-}
-.fade-out {
-    animation: fade-out;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-}
-.fade-in {
-    animation: fade-in;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-}
-.header h1 {
-    font-size: 5em;
-    margin-bottom: 0px;
-}
-.header span {
-    color: #09f;
-}
-.header p {
-    font-size: 1.5em;
-    margin-top: 10px;
 }
 .is-centered {
     text-align: center;
@@ -167,6 +177,9 @@ button {
     font-size: 1em;
     color: black;
     padding: 9px 12px 7px;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 .info {
     text-align: center;
