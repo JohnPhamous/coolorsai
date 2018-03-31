@@ -23,7 +23,7 @@ acorn@^4.0.3:
   version "4.0.13"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.13.tgz#105495ae5361d697bd195c825192e1ad7f253787"
 
-acorn@^5.0.0, acorn@^5.3.0:
+acorn@^5.0.0, acorn@^5.1.1, acorn@^5.3.0:
   version "5.5.3"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.5.3.tgz#f473dd47e0277a08e28e9bec5aeeb04751f0b8c9"
 
@@ -966,6 +966,13 @@ braces@^2.3.0, braces@^2.3.1:
     snapdragon-node "^2.0.1"
     split-string "^3.0.2"
     to-regex "^3.0.1"
+
+brain.js@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/brain.js/-/brain.js-1.1.2.tgz#261c67cb6fc62918954e30836850868f89c77773"
+  dependencies:
+    gpu.js "^1.0.0"
+    thaw.js "^2.0.0"
 
 brorand@^1.0.1:
   version "1.1.0"
@@ -2474,6 +2481,12 @@ globby@^7.1.1:
     ignore "^3.3.5"
     pify "^3.0.0"
     slash "^1.0.0"
+
+gpu.js@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/gpu.js/-/gpu.js-1.2.0.tgz#3af30623c6054a11198725fb6dd9ae625ca9fa89"
+  dependencies:
+    acorn "^5.1.1"
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.1.11"
@@ -5245,6 +5258,10 @@ tar@^2.2.1:
     block-stream "*"
     fstream "^1.0.2"
     inherits "2"
+
+thaw.js@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/thaw.js/-/thaw.js-2.0.0.tgz#452bc5d7ee2ce1b6f92037b05b506cbd656291d0"
 
 through2@^2.0.0:
   version "2.0.3"
