@@ -5,11 +5,15 @@
             <button class="btn btn-dislike" @click="rate('dislike')">DISLIKE</button>
             <button class="btn btn-neutral" @click="rate('neutral')">NEUTRAL</button>
             <button class="btn btn-like" @click="rate('like')">LIKE</button>
-            <button class="btn btn-train" @click="train" :disabled="trainingData.length < 5">Train Data</button>
+            <button class="btn btn-train" @click="train" :disabled="trainingData.length < 1">Train Data</button>
             <button class="btn btn-train" @click="generate" :disabled="isTraining">Generate Color Schemes</button>
-        </div>     
+        </div>
         <div class="preview-grid">
-            <code-preview v-for="s in generatedSchemes" :key="Math.floor(s.score)" :colors="s"/>
+            <code-preview
+                v-for="(s, index) in generatedSchemes"
+                :key="index"
+                :colors="s"
+            />
         </div>
     </div>
 </template>
@@ -44,6 +48,9 @@ export default {
         CodePreview
     },
     methods: {
+        previewCode() {
+            console.log('preview code')
+        },
         setColors() {
             this.currentScheme.keyword = this.getRandomRgb()
             this.currentScheme.variable = this.getRandomRgb()

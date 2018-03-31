@@ -1,5 +1,5 @@
 <template>
-    <div class="code-preview background" :style="{ background: createBackground }">
+    <div class="code-preview background" :style="{ background: createBackground }" @click="showProperties()">
         <p>
         <span 
             class="keyword"
@@ -83,12 +83,18 @@
             :style="{ color: createKeyword }"
         >;</span>
         </p>
+        <modal v-if="showModal" :colors="colors" />
     </div>
 </template>
 
 <script>
+import Modal from './Modal'
+
 export default {
     props: ['colors'],
+    components: {
+        Modal
+    },
     computed: {
         createKeyword() {
             return (
@@ -166,6 +172,16 @@ export default {
                 this.colors.background.blue +
                 ')'
             )
+        }
+    },
+    methods: {
+        showProperties() {
+            this.showModal = !this.showModal
+        }
+    },
+    data() {
+        return {
+            showModal: false
         }
     }
 }
