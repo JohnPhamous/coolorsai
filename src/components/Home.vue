@@ -4,6 +4,7 @@
         :class="[
         {'animate-down': preview},
         {'animate-up': !preview}
+        
     ]">
         <div class="header is-centered">
             <h1>Coolors<span>AI</span></h1>
@@ -24,12 +25,11 @@
             </div>
         </transition>
 
-        <transition name="fade" mode="out-in">
+        <transition name="fade" mode="out-in" v-on:after-enter="transitioned">
             <div v-if="!preview" class="app">
                 <neural-network  />
             </div>
         </transition>
-
     </div>
 </template>
 
@@ -37,6 +37,7 @@
 import Info from './Info'
 import NeuralNetwork from './NeuralNetwork'
 import CodePreview from './CodePreview'
+import 'intro.js/introjs.css'
 
 export default {
     name: 'Home',
@@ -54,6 +55,10 @@ export default {
         createDataEntry() {},
         restartApp() {
             this.preview = true
+        },
+        transitioned() {
+            console.log('hello')
+            this.$intro().start()
         }
     }
 }

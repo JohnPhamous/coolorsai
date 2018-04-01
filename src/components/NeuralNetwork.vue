@@ -1,18 +1,18 @@
 <template>
     <div class="neural-network">
-        <code-preview class="active-preview" :colors="currentScheme" />
-        <div class="training-data-info">
+        <code-preview class="active-preview" :colors="currentScheme" v-intro="'This is the color scheme you will be voting on.'"/>
+        <div class="training-data-info" v-intro="'This is the number of votes you\'ve made. Each session\'s votes are saved so the result of the neural network will be a result of the aggregated votes.'">
             Dataset Size: {{ trainingData.length }}
         </div>
-        <div class="actions-container">
+        <div class="actions-container" v-intro="'You can vote on the above color scheme here.'">
             <button class="btn btn-dislike" @click="rate('dislike')">DISLIKE</button>
             <button class="btn btn-neutral" @click="rate('neutral')">NEUTRAL</button>
             <button class="btn btn-like" @click="rate('like')">LIKE</button>
-            <button class="btn btn-train" @click="train" :disabled="trainingData.length < 1">Train Data</button>
-            <button class="btn btn-train" @click="clearTrainingData" :disabled="trainingData.length < 1">Clear Data</button>
-            <button class="btn btn-train" @click="generate" :disabled="isTraining">Generate</button>
+            <button class="btn btn-train" @click="train" :disabled="trainingData.length < 1" v-intro="'Once you\'ve created enough data, you can train the neural network'">Train Data</button>
+            <button class="btn btn-train" @click="clearTrainingData" :disabled="trainingData.length < 1" v-intro="'If you\'d like a clean start, you can delete the training data'">Clear Data</button>
+            <button class="btn btn-train" @click="generate" :disabled="isTraining" v-intro="'Once you\'ve trained the network, you can generate a few color schemes based on your preferences'">Generate</button>
         </div>
-        <div class="preview-grid">
+        <div class="preview-grid" v-intro="'Your generated color schemes will appear here'">
             <code-preview
                 v-for="(s, index) in sortedSchemes"
                 :key="index"
@@ -28,6 +28,7 @@ import brain from 'brain.js'
 import CodePreview from './CodePreview'
 
 export default {
+    updated() {},
     data() {
         return {
             trainingData: [],
@@ -196,10 +197,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+@import '../../node_modules/intro.js/minified/introjs.min.css';
 .training-data-info {
     text-align: center;
     color: #9c9c9c;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
 }
 .active-preview {
     display: block;
@@ -211,10 +217,11 @@ export default {
 .actions-container {
     display: flex;
     flex-wrap: wrap;
-    padding-left: 30%;
-    padding-right: 30%;
+    margin-left: 30%;
+    margin-right: 30%;
     margin-top: 20px;
     margin-bottom: 50px;
+    z-index: 5;
 }
 .btn {
     padding: 9px 12px 7px;
@@ -244,5 +251,15 @@ export default {
 .preview-grid {
     display: flex;
     flex-wrap: wrap;
+}
+.introjs-tooltiptext {
+    color: black;
+}
+.introjs-helperLayer {
+    background-color: transparent !important;
+    border: 1px white solid;
+}
+.introjs-overlay {
+    opacity: 0 !important;
 }
 </style>
