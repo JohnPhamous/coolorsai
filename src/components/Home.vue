@@ -13,7 +13,7 @@
         </div>
 
         <transition name="fade" mode="out-in">
-            <button v-if="!preview" @click="restartApp" class="btn-restart">Restart</button>
+            <button v-if="!preview" @click="restartApp" class="btn-restart">Home</button>
 
             <div
                 v-if="preview"
@@ -42,7 +42,6 @@ export default {
     name: 'Home',
     data() {
         return {
-            schemes: [],
             preview: true
         }
     },
@@ -55,7 +54,6 @@ export default {
         createDataEntry() {},
         restartApp() {
             this.preview = true
-            this.schemes.length = 0
         }
     }
 }

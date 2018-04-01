@@ -83,7 +83,9 @@
             :style="{ color: createKeyword }"
         >;</span>
         </p>
-        <modal v-if="showModal" :colors="colors" />
+        <transition name="fade" mode="in-out">
+            <modal v-if="showModal" :colors="colors" />
+        </transition>
     </div>
 </template>
 
@@ -230,5 +232,19 @@ export default {
 }
 .method {
     color: cyan;
+}
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+    transition: transform 0.5s;
+    transform: translateY(0px);
+    opacity: 1;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+    transition: opacity 0.5s;
+    transition: transform 0.5s;
+    transform: translateY(-200px);
 }
 </style>

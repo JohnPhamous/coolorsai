@@ -1,20 +1,25 @@
 <template>
     <div class="neural-network">
         <code-preview class="active-preview" :colors="currentScheme" />
+        <div class="training-data-info">
+            Dataset Size: {{ trainingData.length }}
+        </div>
         <div class="actions-container">
             <button class="btn btn-dislike" @click="rate('dislike')">DISLIKE</button>
             <button class="btn btn-neutral" @click="rate('neutral')">NEUTRAL</button>
             <button class="btn btn-like" @click="rate('like')">LIKE</button>
             <button class="btn btn-train" @click="train" :disabled="trainingData.length < 1">Train Data</button>
-            <button class="btn btn-train" @click="generate" :disabled="isTraining">Generate Color Schemes</button>
+            <button class="btn btn-train" @click="clearTrainingData" :disabled="trainingData.length < 1">Clear Data</button>
+            <button class="btn btn-train" @click="generate" :disabled="isTraining">Generate</button>
         </div>
         <div class="preview-grid">
             <code-preview
-                v-for="(s, index) in generatedSchemes"
+                v-for="(s, index) in sortedSchemes"
                 :key="index"
                 :colors="s"
             />
         </div>
+        
     </div>
 </template>
 
@@ -43,14 +48,13 @@ export default {
     created() {
         this.setColors()
         this.neuralNetwork = new brain.NeuralNetwork()
+        this.trainingData =
+            JSON.parse(localStorage.getItem('trainingData')) || []
     },
     components: {
         CodePreview
     },
     methods: {
-        previewCode() {
-            console.log('preview code')
-        },
         setColors() {
             this.currentScheme.keyword = this.getRandomRgb()
             this.currentScheme.variable = this.getRandomRgb()
@@ -69,9 +73,17 @@ export default {
                 secondary: this.getRandomRgb()
             }
         },
+        clearTrainingData() {
+            if (confirm('Are you sure you want to delete the data?')) {
+                localStorage.clear()
+                this.trainingData = []
+            }
+        },
         rate(type) {
             let score = 0
             this.isTraining = true
+            console.log(this.trainingData)
+
             switch (type) {
                 case 'dislike':
                     score = 0
@@ -87,6 +99,7 @@ export default {
                     break
             }
 
+            console.log(typeof this.trainingData)
             this.trainingData.push({
                 output: [score],
                 input: [
@@ -110,6 +123,8 @@ export default {
                     this.normalizeData(this.currentScheme.secondary.blue)
                 ]
             })
+
+            window.localStorage.trainingData = JSON.stringify(this.trainingData)
 
             this.setColors()
         },
@@ -138,7 +153,7 @@ export default {
             this.isTraining = false
         },
         generate() {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 500; i++) {
                 let scheme = this.generateColors()
                 let data = [
                     this.normalizeData(scheme.keyword.red),
@@ -168,37 +183,42 @@ export default {
 
             this.sortedSchemes = this.generatedSchemes.sort((left, right) => {
                 let a = left.score
-                // console.log('a', a)
                 let b = right.score
-                // console.log('b', b)
-
                 return b > a
             })
 
-            // this.sortedSchemes.forEach(item => {
-            //     console.log(item.score)
-            // })
+            let highestSchemes = this.sortedSchemes.slice(0, 6)
+            let lowestSchemes = this.sortedSchemes.slice(450, 456)
+            let allSchemes = highestSchemes.concat(lowestSchemes)
+            this.sortedSchemes = allSchemes
         }
     }
 }
 </script>
 
 <style scoped>
+.training-data-info {
+    text-align: center;
+    color: #9c9c9c;
+}
 .active-preview {
     display: block;
     margin-left: auto !important;
     margin-right: auto !important;
     pointer-events: none;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 .actions-container {
     display: flex;
     flex-wrap: wrap;
     padding-left: 30%;
     padding-right: 30%;
+    margin-top: 20px;
+    margin-bottom: 50px;
 }
 .btn {
     padding: 9px 12px 7px;
-    width: 150px;
+    width: 30%;
     flex-shrink: 2;
     font-family: 'Source Sans Pro', sans-serif;
     transition: 0.3s ease all;
@@ -210,8 +230,7 @@ export default {
     background: #09f;
 }
 .btn-train {
-    width: 48%;
-    margin-top: 10px;
+    margin-top: 15px;
     background: #fdc307;
     font-weight: 800;
 }

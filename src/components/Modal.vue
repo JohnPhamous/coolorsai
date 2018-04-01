@@ -1,7 +1,7 @@
 <template>
     <div class="modal">
         <hr />
-        <h1>Properties</h1>
+        <h1>Properties (Index: {{ Math.round(colors.score * 100) / 100 }}%)</h1>
         <p>Keywords: <span :style="{ 'background': createKeyword }">{{ createKeyword }}</span></p>
         <p>Variables: <span :style="{ 'background': createVariable }">{{ createVariable }}</span></p>
         <p>Literals: <span :style="{ 'background': createString }">{{ createString }}</span></p>
