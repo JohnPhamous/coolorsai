@@ -123,22 +123,45 @@ body {
     font-size: 1.5em;
     margin-top: 10px;
 }
-@keyframes go-up {
-    from {
-        transform: translateY(30vh);
+
+@media (max-width: 800px) {
+    @keyframes go-up {
+        from {
+            transform: translateY(10vh);
+        }
+        to {
+            transform: translateY(0vh);
+        }
     }
-    to {
-        transform: translateY(0vh);
+    @keyframes go-down {
+        from {
+            transform: translateY(0vh);
+        }
+        to {
+            transform: translateY(10vh);
+        }
     }
 }
-@keyframes go-down {
-    from {
-        transform: translateY(0vh);
+
+@media (min-width: 800px) {
+    @keyframes go-up {
+        from {
+            transform: translateY(30vh);
+        }
+        to {
+            transform: translateY(0vh);
+        }
     }
-    to {
-        transform: translateY(30vh);
+    @keyframes go-down {
+        from {
+            transform: translateY(0vh);
+        }
+        to {
+            transform: translateY(30vh);
+        }
     }
 }
+
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.5s;

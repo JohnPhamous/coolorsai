@@ -18,4 +18,10 @@ export default {}
     font-weight: 400;
     line-height: 1.5;
 }
+@media (min-width: 800px) {
+    .info p {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
 </style>

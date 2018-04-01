@@ -214,15 +214,27 @@ export default {
     pointer-events: none;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
-.actions-container {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 20px;
-    margin-bottom: 50px;
-    z-index: 5;
+@media (max-width: 800px) {
+    .actions-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        margin-bottom: 50px;
+        z-index: 5;
+    }
 }
+@media (min-width: 800px) {
+    .actions-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 30%;
+        margin-right: 30%;
+        margin-top: 20px;
+        margin-bottom: 50px;
+        z-index: 5;
+    }
+}
+
 .btn {
     padding: 9px 12px 7px;
     width: 30%;

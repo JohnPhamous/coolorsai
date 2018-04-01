@@ -190,13 +190,25 @@ export default {
 </script>
 
 <style scoped>
-.code-preview {
-    width: 25%;
-    flex-grow: 1;
-    padding: 40px 80px;
-    margin: 20px;
-    font-family: Menlo, Monaco, Consolas, 'Droid Sans Mono', 'Inconsolata',
-        'Courier New', monospace;
+@media (max-width: 800px) {
+    .code-preview {
+        width: 50%;
+        flex-grow: 1;
+        padding: 40px 80px;
+        margin: 20px;
+        font-family: Menlo, Monaco, Consolas, 'Droid Sans Mono', 'Inconsolata',
+            'Courier New', monospace;
+    }
+}
+@media (min-width: 800px) {
+    .code-preview {
+        width: 25%;
+        flex-grow: 1;
+        padding: 40px 80px;
+        margin: 20px;
+        font-family: Menlo, Monaco, Consolas, 'Droid Sans Mono', 'Inconsolata',
+            'Courier New', monospace;
+    }
 }
 @keyframes code-hover {
     from {
