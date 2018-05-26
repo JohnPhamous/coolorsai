@@ -57,7 +57,6 @@ export default {
             this.preview = true
         },
         transitioned() {
-            console.log('hello')
             this.$intro().start()
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div class="neural-network">
+    <div class="neural-network" v-on:keyup.37="rate('dislike')">
         <code-preview class="active-preview" :colors="currentScheme" v-intro="'This is the color scheme you will be voting on.'"/>
         <div class="training-data-info" v-intro="'This is the number of votes you\'ve made. Each session\'s votes are saved so the result of the neural network will be a result of the aggregated votes.'">
             Dataset Size: {{ trainingData.length }}
@@ -84,6 +84,7 @@ export default {
             let score = 0
             this.isTraining = true
             console.log(this.trainingData)
+            console.log('hillo')
 
             switch (type) {
                 case 'dislike':
